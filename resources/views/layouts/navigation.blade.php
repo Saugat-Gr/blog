@@ -16,7 +16,7 @@
                         {{ __('Posts') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('pages.about')" :active="request()->routeIs('about')">
+                    <x-nav-link :href="route('pages.about')" :active="request()->routeIs('pages.about')">
                         {{ __('About') }}
                     </x-nav-link>
                 </div>
