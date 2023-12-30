@@ -49,7 +49,7 @@
             </div>
         
         <br>
-        <div style="margin-left:80px">
+        <div style="margin-left:60px">
             Don't have an Account? <a href="{{ route('register')}}"><strong><u><span style="color: blue">Sign Up</span></a></u></strong>
         </div>
     </form>
