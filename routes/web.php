@@ -18,22 +18,29 @@ Route::get('/', function () {
     return view('pages.recent');
 });
 
- Route::get('/posts', function () {
-     return view('blog.posts');
- })->name('blog.posts');
-
- Route::get('/categories',function()
-{
-    return view('blog.categories');
-})->name('blog.categories');
-
 Route::get('/dashboard', function () {
     return view('pages.index');
 })->name('pages.index');
 
-Route::get('/tags', function(){
-        return view('blog.tags');
-})->name('blog.tags');
+
+
+ Route::middleware('auth')->group(function(){
+    
+    Route::get('/posts', function () {
+        return view('blog.posts');
+    })->name('blog.posts');
+   
+    Route::get('/categories',function()
+   {
+       return view('blog.categories');
+   })->name('blog.categories');
+   
+   Route::get('/tags', function(){
+           return view('blog.tags');
+   })->name('blog.tags');
+
+ } 
+);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
