@@ -15,12 +15,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('posts.index');
+    return view('pages.recent');
 });
 
+ Route::get('/posts', function () {
+     return view('blog.posts');
+ })->name('blog.posts');
+
+ Route::get('/categories',function()
+{
+    return view('blog.categories');
+})->name('blog.categories');
+
 Route::get('/dashboard', function () {
-    return view('posts.index');
-})->name('posts.index');
+    return view('pages.index');
+})->name('pages.index');
+
+Route::get('/tags', function(){
+        return view('blog.tags');
+})->name('blog.tags');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,11 +42,16 @@ Route::middleware('auth')->group(function () {
 });
 
  Route::get('/recent', function(){
-     return view('posts.recent');
- })->name('posts.recent');
+     return view('pages.recent');
+ })->name('pages.recent');
 
   Route::get('/about', function(){
-      return view('about');    
-})->name('about');
+      return view('pages.about');    
+})->name('pages.about');
+
+
+ Route::get('/app', function(){
+     return view('app');
+ });
 
 require __DIR__.'/auth.php';

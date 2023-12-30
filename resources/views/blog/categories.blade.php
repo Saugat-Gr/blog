@@ -2,7 +2,7 @@
 
     <x-slot name="header">
 
-         <h1>Recent posts will be shown here.</h1>
+         Categories of Posts
 
     </x-slot>
 
