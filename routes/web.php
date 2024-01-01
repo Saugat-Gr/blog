@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Blog\CategoryController;
+use App\Http\Controllers\Blog\PostController;
+use App\Http\Controllers\Blog\TagController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,18 +29,9 @@ Route::get('/dashboard', function () {
 
  Route::middleware('auth')->group(function(){
     
-    Route::get('/posts', function () {
-        return view('blog.posts');
-    })->name('blog.posts');
-   
-    Route::get('/categories',function()
-   {
-       return view('blog.categories');
-   })->name('blog.categories');
-   
-   Route::get('/tags', function(){
-           return view('blog.tags');
-   })->name('blog.tags');
+    Route::get('/posts',[PostController::class, 'index'])->name('blog.posts');
+    Route::get('/categories',[CategoryController::class, 'index'])->name('blog.categories');
+   Route::get('/tags', [TagController::class, 'index'])->name('blog.tags');
 
  } 
 );
