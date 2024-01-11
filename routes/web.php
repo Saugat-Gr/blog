@@ -31,6 +31,9 @@ Route::get('/about', function(){
     return view('pages.about');    
 })->name('pages.about');
 
+Route::get('/dashboard', [PostController::class, 'index']);
+;
+
 
 
 require __DIR__.'/auth.php';
