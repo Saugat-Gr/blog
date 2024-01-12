@@ -29,4 +29,37 @@ class CateogoryController extends Controller
         return redirect()->route('blog.categories.index');
   }
 
+   public function edit(Category $category){
+
+     return view('blog.categories.edit', compact('category'));
+
+   }
+
+    public function update(Request $request, Category $category){
+ 
+          $request->validate([
+            'name' => 'required'
+          ]);
+
+           $category->update([
+            'name' => $request->name
+           ]);
+
+           $category->save();
+
+            return redirect()->route('blog.categories.index');
+}
+
+  public function destroy(Category $category){
+
+        if($category->posts()->count()){
+             return back()->withErrors(['error'=>'This category has posts.']);
+        }
+
+         $category->delete();
+
+          return redirect()->route('blog.categories.index');
+
+  }
+
 }

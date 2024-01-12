@@ -3,6 +3,18 @@
         Categories list
     </x-slot>
 
+    
+    @if($errors->any())
+    
+    @foreach($errors->all() as $error)
+    <div class="p-6 bg-white border-b border-gray-200">
+     <div  style="color:red">
+          Error:
+         {{$error}}
+     </div>
+    </div>
+@endforeach
+   @endif
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">

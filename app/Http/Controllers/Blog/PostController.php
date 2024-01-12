@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -57,9 +58,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+            $post = Post::findOrFail($id);
+            return view('posts.show', compact('post'));
     }
 
     /**
@@ -67,7 +69,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+         $categories = Category::all();
+
+        return view('blog.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -75,7 +79,31 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => ['required'],
+            'image' => ['nullable', 'max:2028', 'image'],
+            'description' => ['required'],
+            'category' => ['required', 'integer', 'exists:categories,id'],
+         ]);
+
+         if ($request->has('image')) {
+            Storage::delete('public/uploads/' . $post->image);
+            
+            $fileName = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('uploads', $fileName, 'public');
+        }
+
+         $post->update([
+        'title' => $request->title,
+        'image' => $fileName ?? $post->image,
+        'description' => $request->description,
+        'category_id' => $request->category
+
+         ]);
+
+          $post->save();
+           return redirect()->route('blog.posts.index');
+
     }
 
     /**
@@ -83,6 +111,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        
+         if($post->image){
+             Storage::delete('public/uploads/'. $post->image);
     }
+      $post->delete();
+      return redirect()->route('blog.posts.index');
+}
 }

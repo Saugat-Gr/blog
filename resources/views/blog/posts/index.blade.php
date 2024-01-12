@@ -35,6 +35,7 @@
 
                                    <a href="{{ route('blog.posts.edit', $post->id) }}" style="color:#008000;">Edit</a>
 
+                                   <a href="{{route('blog.posts.show', $post->id)}}" style="color: blue"> Show</a>
                                     <form action="{{ route('blog.posts.destroy', $post->id) }}" method="POST"
                                           onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
