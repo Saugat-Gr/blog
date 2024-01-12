@@ -36,9 +36,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($categories as $key=>$category)
                             <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 border-b border-gray-200">{{ $category->id }}</td>
+                                <td class="px-6 py-4 border-b border-gray-200">{{ $key+1 }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $category->name }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">
                                    <a href="{{route('blog.categories.edit', $category->id)}}" style="color: green;">Edit</a>

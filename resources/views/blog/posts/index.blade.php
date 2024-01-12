@@ -26,9 +26,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($posts as $post)
+                            @foreach($posts as $key=>$post)
                             <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 border-b border-gray-200">{{ $post->id }}</td>
+                                <td class="px-6 py-4 border-b border-gray-200">{{ $key+1 }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $post->title }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $post->category->name }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">
